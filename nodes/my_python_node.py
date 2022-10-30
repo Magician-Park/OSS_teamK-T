@@ -46,16 +46,13 @@ def send_goal(x, y, theta):
     else:
         print(client.get_result())
 
-update_init_pose(0.0, 0.0, 0.0)
-send_goal(-0.5, -0.3, 0.0)
-#Added another waypoint
-send_goal(-0.5, -0.3, 0.0)
-#Added another waypoint
-send_goal(-2.0, -0.3, 0.0)
+update_init_pose(-2.0, -0.3, 0.0)
 
-def update_timer(timer_event):
+send_goal(-0.5, -0.3, 0.0)
+
+#def update_timer(timer_event):
     print('update time')
 
-rospy.Timer(rospy.Duration(0.5), update_timer)
+#rospy.Timer(rospy.Duration(0.5), update_timer)
 
 rospy.spin()
