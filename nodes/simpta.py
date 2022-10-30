@@ -78,7 +78,7 @@ class ActionClientNode:
         while(1):
             key = self.getKey()
             if key == 'i':
-                self.update_init_pose(0.1, 0.0, 0.0)
+                self.send_goal(0.1, 0.0, 0.0)
                 self.pub_init.publish(self.init_pose)
 
 if __name__ == '__main__':
