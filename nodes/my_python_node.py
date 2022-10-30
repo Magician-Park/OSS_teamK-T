@@ -16,6 +16,7 @@ print(client.wait_for_server())
 
 def update_init_pose(x, y, theta):
     init_pose = PoseWithCovarianceStamped()
+    init_pose.header.frame_id = "map"
     init_pose.header.stamp = rospy.Time.now()
     init_pose.pose.pose.position.x = x
     init_pose.pose.pose.position.y = y
