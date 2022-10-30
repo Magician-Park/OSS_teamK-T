@@ -14,7 +14,7 @@ pub_init = rospy.Publisher('initialpose', PoseWithCovarianceStamped, queue_size=
 client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
 print(client.wait_for_server())
 
-def update_init_pose(self, x, y, theta):
+def update_init_pose(x, y, theta):
     init_pose = PoseWithCovarianceStamped()
     init_pose.header.stamp = rospy.Time.now()
     init_pose.pose.pose.position.x = x
@@ -38,13 +38,14 @@ def send_goal(x, y, theta):
     goal.target_pose.pose.orientation.y = quat[1]
     goal.target_pose.pose.orientation.z = quat[2]
     goal.target_pose.pose.orientation.w = quat[3]
+    client.send_goal(goal)
     wait = client.wait_for_result()
     if not wait:
         print('Error')
     else:
         print(client.get_result())
 
-update_init_pose(0.0, 0.0, 0.0, 0.0)
+update_init_pose(0.0, 0.0, 0.0)
 send_goal(-0.5, -0.3, 0.0)
 #Added another waypoint
 send_goal(-0.5, -0.3, 0.0)
