@@ -51,7 +51,7 @@ update_init_pose(-2.0, -0.3, 0.0)
 send_goal(-0.5, -0.3, 0.0)
 
 #def update_timer(timer_event):
-    print('update time')
+#   print('update time')
 
 #rospy.Timer(rospy.Duration(0.5), update_timer)
 
