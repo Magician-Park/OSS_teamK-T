@@ -35,6 +35,31 @@ class ActionClientNode:
         # Waits until the action server has started up and started listening for goals.
         self.client.wait_for_server()
 
+
+    def getKey(self):
+        if os.name == 'nt':
+            return msvcrt.getch()
+
+        tty.setraw(sys.stdin.fileno())
+        rlist, _, _ = select.select([sys.stdin], [], [], 0.1)
+        if rlist:
+            key = sys.stdin.read(1)
+        else:
+            key = ''
+
+        termios.tcsetattr(sys.stdin, termios.TCSADRAIN, self.settings)
+        return key
+
+    def send_goal(self, goal):
+        # Send the goal to the action server.
+        self.client.send_goal(goal)
+        wait = self.client.wait_for_result()
+        if not wait:
+            rospy.logger("Action server not available!")
+            rospy.signal_shutdown("Action server not available!")
+        else:
+            return self.client.get_result()
+
     def update_init_pose(self, x, y, theta):
         self.init_pose.header.stamp = rospy.Time.now()
         self.init_pose.pose.pose.position.x += x
@@ -50,11 +75,11 @@ class ActionClientNode:
 
     def main(self):
         #rospy.spin()
-            self.update_init_pose(0.1, 0.0, 0.0)
-            self.update_init_pose(0.1, 0.0, 0.0)
-            self.update_init_pose(0.1, 0.0, 0.0)
-            self.update_init_pose(0.1, 0.0, 0.0)
-            self.update_init_pose(0.1, 0.0, 0.0)
+        while(1):
+            key = self.getKey()
+            if key == 'i':
+                self.update_init_pose(0.1, 0.0, 0.0)
+                self.pub_init.publish(self.init_pose)
 
 if __name__ == '__main__':
     try :
