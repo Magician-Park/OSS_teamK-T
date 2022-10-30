@@ -45,7 +45,7 @@ def send_goal(x, y, theta):
 update_init_pose(-2.0,-0.3,0.0)
 send_goal(-0.5,-0.3, 0.0)
 #Added another waypoint
-send_goal(-0.5,1.0, 0.0)
+send_goal(-0.5, 1.0, 0.0)
 
 send_goal(-2.0,-0.3, 0.0)
 

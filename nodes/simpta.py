@@ -50,9 +50,11 @@ class ActionClientNode:
 
     def main(self):
         #rospy.spin()
-        while(1):
-                self.update_init_pose(0.1, 0.0, 0.0)
-                self.pub_init.publish(self.init_pose)
+            self.update_init_pose(0.1, 0.0, 0.0)
+            self.update_init_pose(0.1, 0.0, 0.0)
+            self.update_init_pose(0.1, 0.0, 0.0)
+            self.update_init_pose(0.1, 0.0, 0.0)
+            self.update_init_pose(0.1, 0.0, 0.0)
 
 if __name__ == '__main__':
     try :
